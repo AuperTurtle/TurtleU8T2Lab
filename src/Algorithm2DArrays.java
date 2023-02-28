@@ -341,31 +341,22 @@ public class Algorithm2DArrays
      *  @param arr  2D array of ints
      */
     public static boolean magicSquare(int[][] arr) {
-        int magicNum = 0;
-        int tempNum = 0;
+        int magicNum = sumForRow(arr, 0);
+
+        for (int i = 0; i < arr.length; i++) {
+            if (sumForRow(arr, i) != magicNum) {
+                return false;
+            }
+        }
         for (int i = 0; i < arr[0].length; i++) {
-            magicNum += arr[0][i];
-        }
-
-        for (int i = 0; i < arr.length; i++) {
-            for (int z = 0; z < arr[0].length; z++) {
-                tempNum += arr[i][z];
-            }
-            if (tempNum != magicNum) {
+            if (sumForColumn(arr, i) != magicNum) {
                 return false;
             }
-            tempNum = 0;
         }
-
-        for (int i = 0; i < arr.length; i++) {
-            for (int z = 0; z < arr[0].length; z++) {
-                tempNum += arr[][z];
-            }
-            if (tempNum != magicNum) {
-                return false;
-            }
-            tempNum = 0;
+        if (consecutive(arr) == true) {
+            return false;
         }
+        return true;
     }
 
 }
